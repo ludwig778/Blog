@@ -1,0 +1,35 @@
+<div class="navbar navbar-default navbar-fixed-top nav-unscrolled" role="navigation">
+    <div class="container main-container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <%= link_to "<TechBlog />", articles_path, :class => "navbar-brand" %>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><%= link_to "Articles", articles_path %></li>
+                <li><%= link_to "Categories", categories_path %></li>
+                <% if logged_in? %>
+                  <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.admin? ? "Admin" : "Your Profile" %> <%= current_gravatar(size: 25, design: "img-rounded") %> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to "New Article", new_article_path %></li>
+                      <li role="separator" class="divider"></li>
+                      <li><%= link_to "My Articles", user_path(current_user) %></li>
+                      <li role="separator" class="divider"></li>
+                      <%#<li><%= link_to "Edit your profile", edit_user_path(current_user) ></li>%>
+                      <li><%= link_to 'Log out', logout_path, method: :delete %></li>
+                    </ul>
+                  </li>
+                <% else %>
+                  <li><%= link_to 'Log in', login_path %></li>
+                  <li><%= link_to 'Signup', signup_path %></li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<% title "Listing All Categories" %>
+<div align="center">
+    <div class="row">
+
+        <ul class="listing">
+
+
+          <% if @categories.present? %>
+            <% @categories.each do |category| %>
+            <div class="wells col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <div class="well">
+                <%= link_to category_path(category) do %>
+                    <div class="img-category">
+                      <div class="well_wut" style="background-image: url('<%= category.image.url %>');"></div>
+                    </div>
+                    <div class="article-title title-div">
+                      <h5>
+                        <%= category.name %>
+                      </h5>
+                    </div>
+                <% end %>
+                    <div class="count-div">
+                        <p>
+
+                        <%= category.articles.count %>
+                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+
+<!--
+                        <a class="img-link" href="#">
+
+                        </a>-->
+
+                        <% if logged_in? && current_user.admin? %>
+                        <button type="button" class="img-link" data-toggle="modal" data-target="#myModal<%= category.id %>">
+                            <i class="fa fa-plus" aria-hidden="true"></i> <i class="fa fa-picture-o" aria-hidden="true"></i>
+                        </button>
+                        <div class="modal fade" id="myModal<%= category.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                            </div>
+                                <%= form_for category do |f| %>
+                            <div class="modal-body">
+
+                                <%= category.id %>
+
+                                <p>
+                                    <label>My Avatar URL:</label>
+                                    <%= f.text_field :remote_image_url %>
+                                </p>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <%= f.submit "Update image", class: "btn btn-primary" %>
+                            </div>
+                                <% end %>
+                            </div>
+                          </div>
+                        </div>
+                        <% end %>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+
+            <% else %>
+            <div class="well well-empty">
+              <h3>No categories yet</h3>
+            </div>
+            <% end %>
+        </ul>
+    </div>
+    <%= will_paginate %>
+</div>

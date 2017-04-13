@@ -1,0 +1,27 @@
+<header>
+    <div class="container main-container">
+        <div class="row">
+          <div class="header-content">
+            <div class="col-xs-12 col-sm-8">
+                <div class="header-title">
+                    <h1><%= yield(:title) %></h1>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div class="header-search">
+                    <%= form_tag url_for(:controller => 'articles', :action => 'search'), :method => 'get' do %>
+                    <div class="header-input input-group">
+                        <%= text_field_tag :q, "", class: "form-control" %>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</header>

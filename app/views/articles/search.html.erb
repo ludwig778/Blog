@@ -1,0 +1,11 @@
+<% title "Research: #{@search}" %>
+<% if @articles.present? %>
+<%= render 'article', obj: @articles %>
+<% else %>
+<div class="well well-empty">
+  <h3>No articles found</h3>
+</div>
+<% end %>
+<div align="center">
+    <%= will_paginate %>
+</div>
